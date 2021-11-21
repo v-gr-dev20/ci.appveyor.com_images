@@ -13,6 +13,8 @@ environment:
   matrix:
   - BUILDER: MSBuilder
   - BUILDER: CMake
+  - HOST_OR_DOCKER: host
+  - HOST_OR_DOCKER: docker
 
 for:
 -
@@ -36,8 +38,9 @@ for:
 
 -
   matrix:
-    only:
+    exclude:
       - image: Visual Studio 2019
+        HOST_OR_DOCKER: docker
 
   build_script:
   - pwsh: |
