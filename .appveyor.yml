@@ -1,0 +1,53 @@
+version: 1.0.{build}
+image:
+  - Visual Studio 2019
+  - Ubuntu2004
+branches:
+  only:
+  - matrix_probes
+configuration:
+  - Debug
+  - Release
+platform: x64
+environment:
+  matrix:
+  - BUILDER: MSBuilder
+  - BUILDER: CMake
+
+for:
+-
+  matrix:
+    exclude:
+      - image: Ubuntu2004
+        BUILDER: MSBuilder
+
+  build_script:
+  - sh: |
+        echo "Current mode description:"
+        echo "APPVEYOR_BUILD_WORKER_IMAGE=$APPVEYOR_BUILD_WORKER_IMAGE"
+        echo "APPVEYOR_REPO_BRANCH=$APPVEYOR_REPO_BRANCH"
+        echo "CONFIGURATION=$CONFIGURATION"
+        echo "PLATFORM=$PLATFORM"
+        echo "BUILDER=$BUILDER"
+        echo "End of description."
+  test_script:
+  - sh: |
+        echo "Tests OK"
+
+-
+  matrix:
+    only:
+      - image: Visual Studio 2019
+
+  build_script:
+  - pwsh: |
+          echo "Current mode description:"
+          echo "APPVEYOR_BUILD_WORKER_IMAGE=$env:APPVEYOR_BUILD_WORKER_IMAGE"
+          echo "APPVEYOR_REPO_BRANCH=$env:APPVEYOR_REPO_BRANCH"
+          echo "CONFIGURATION=$env:CONFIGURATION"
+          echo "PLATFORM=$env:PLATFORM"
+          echo "BUILDER=$env:BUILDER"
+          echo "End of description."
+  test_script:
+  - pwsh: |
+        echo "Tests OK"
