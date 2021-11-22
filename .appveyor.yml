@@ -19,25 +19,6 @@ environment:
     HOST_OR_DOCKER: docker
 
 for:
--
-  matrix:
-    exclude:
-      - image: Ubuntu2004
-        BUILDER: MSBuilder
-
-  build_script:
-  - sh: |
-        echo "Current mode description:"
-        echo "APPVEYOR_BUILD_WORKER_IMAGE=$APPVEYOR_BUILD_WORKER_IMAGE"
-        echo "APPVEYOR_REPO_BRANCH=$APPVEYOR_REPO_BRANCH"
-        echo "CONFIGURATION=$CONFIGURATION"
-        echo "PLATFORM=$PLATFORM"
-        echo "BUILDER=$BUILDER"
-        echo "HOST_OR_DOCKER=$HOST_OR_DOCKER"
-        echo "End of description."
-  test_script:
-  - sh: |
-        echo "Tests OK"
 
 -
   matrix:
@@ -61,4 +42,24 @@ for:
           echo "End of description."
   test_script:
   - pwsh: |
+        echo "Tests OK"
+
+-
+  matrix:
+    exclude:
+      - image: Ubuntu2004
+        BUILDER: MSBuilder
+
+  build_script:
+  - sh: |
+        echo "Current mode description:"
+        echo "APPVEYOR_BUILD_WORKER_IMAGE=$APPVEYOR_BUILD_WORKER_IMAGE"
+        echo "APPVEYOR_REPO_BRANCH=$APPVEYOR_REPO_BRANCH"
+        echo "CONFIGURATION=$CONFIGURATION"
+        echo "PLATFORM=$PLATFORM"
+        echo "BUILDER=$BUILDER"
+        echo "HOST_OR_DOCKER=$HOST_OR_DOCKER"
+        echo "End of description."
+  test_script:
+  - sh: |
         echo "Tests OK"
