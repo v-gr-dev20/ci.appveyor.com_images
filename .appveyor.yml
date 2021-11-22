@@ -12,9 +12,11 @@ platform: x64
 environment:
   matrix:
   - BUILDER: MSBuilder
+    HOST_OR_DOCKER: host
   - BUILDER: CMake
-  - HOST_OR_DOCKER: host
-  - HOST_OR_DOCKER: docker
+    HOST_OR_DOCKER: host
+  - BUILDER: CMake
+    HOST_OR_DOCKER: docker
 
 for:
 -
@@ -31,6 +33,7 @@ for:
         echo "CONFIGURATION=$CONFIGURATION"
         echo "PLATFORM=$PLATFORM"
         echo "BUILDER=$BUILDER"
+        echo "HOST_OR_DOCKER=$HOST_OR_DOCKER"
         echo "End of description."
   test_script:
   - sh: |
@@ -50,6 +53,7 @@ for:
           echo "CONFIGURATION=$env:CONFIGURATION"
           echo "PLATFORM=$env:PLATFORM"
           echo "BUILDER=$env:BUILDER"
+          echo "HOST_OR_DOCKER=$env:HOST_OR_DOCKER"
           echo "End of description."
   test_script:
   - pwsh: |
