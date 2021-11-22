@@ -31,6 +31,7 @@ for:
   matrix:
     only:
       - image: Visual Studio 2019
+        BUILDER: MSBuilder
 
   build_script:
   - pwsh: |
@@ -44,12 +45,33 @@ for:
           echo "End of description."
   test_script:
   - pwsh: |
-        echo "Tests OK"
+        echo "Tests BUILDER=$env:BUILDER OK"
+
+-
+  matrix:
+    only:
+      - image: Visual Studio 2019
+        BUILDER: CMake
+
+  build_script:
+  - pwsh: |
+          echo "Current mode description:"
+          echo "APPVEYOR_BUILD_WORKER_IMAGE=$env:APPVEYOR_BUILD_WORKER_IMAGE"
+          echo "APPVEYOR_REPO_BRANCH=$env:APPVEYOR_REPO_BRANCH"
+          echo "CONFIGURATION=$env:CONFIGURATION"
+          echo "PLATFORM=$env:PLATFORM"
+          echo "BUILDER=$env:BUILDER"
+          echo "HOST_OR_DOCKER=$env:HOST_OR_DOCKER"
+          echo "End of description."
+  test_script:
+  - pwsh: |
+        echo "Tests BUILDER=$env:BUILDER OK"
 
 -
   matrix:
     only:
       - image: Ubuntu2004
+        HOST_OR_DOCKER: host
 
   build_script:
   - sh: |
@@ -63,4 +85,24 @@ for:
         echo "End of description."
   test_script:
   - sh: |
-        echo "Tests OK"
+        echo "Tests HOST_OR_DOCKER=$HOST_OR_DOCKER OK"
+
+-
+  matrix:
+    only:
+      - image: Ubuntu2004
+        HOST_OR_DOCKER: docker
+
+  build_script:
+  - sh: |
+        echo "Current mode description:"
+        echo "APPVEYOR_BUILD_WORKER_IMAGE=$APPVEYOR_BUILD_WORKER_IMAGE"
+        echo "APPVEYOR_REPO_BRANCH=$APPVEYOR_REPO_BRANCH"
+        echo "CONFIGURATION=$CONFIGURATION"
+        echo "PLATFORM=$PLATFORM"
+        echo "BUILDER=$BUILDER"
+        echo "HOST_OR_DOCKER=$HOST_OR_DOCKER"
+        echo "End of description."
+  test_script:
+  - sh: |
+        echo "Tests HOST_OR_DOCKER=$HOST_OR_DOCKER OK"
