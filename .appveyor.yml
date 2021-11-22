@@ -18,14 +18,19 @@ environment:
   - BUILDER: CMake
     HOST_OR_DOCKER: docker
 
+matrix:
+  exclude:
+    - image: Visual Studio 2019
+      HOST_OR_DOCKER: docker
+    - image: Ubuntu2004
+      BUILDER: MSBuilder
+
 for:
 
 -
   matrix:
-    exclude:
+    only:
       - image: Visual Studio 2019
-        HOST_OR_DOCKER: docker
-      - image: Ubuntu2004
 
   build_script:
   - pwsh: |
@@ -43,10 +48,8 @@ for:
 
 -
   matrix:
-    exclude:
+    only:
       - image: Ubuntu2004
-        BUILDER: MSBuilder
-      - image: Visual Studio 2019
 
   build_script:
   - sh: |
