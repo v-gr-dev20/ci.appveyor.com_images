@@ -24,13 +24,8 @@ for:
   matrix:
     exclude:
       - image: Visual Studio 2019
-#        BUILDER: MSBuilder
         HOST_OR_DOCKER: docker
-#      - image: Visual Studio 2019
-#        BUILDER: CMake
-#        HOST_OR_DOCKER: docker
       - image: Ubuntu2004
-        BUILDER: MSBuilder
 
   build_script:
   - pwsh: |
@@ -51,6 +46,7 @@ for:
     exclude:
       - image: Ubuntu2004
         BUILDER: MSBuilder
+      - image: Visual Studio 2019
 
   build_script:
   - sh: |
