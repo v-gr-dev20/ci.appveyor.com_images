@@ -24,11 +24,11 @@ for:
   matrix:
     exclude:
       - image: Visual Studio 2019
-        BUILDER: MSBuilder
+#        BUILDER: MSBuilder
         HOST_OR_DOCKER: docker
-      - image: Visual Studio 2019
-        BUILDER: CMake
-        HOST_OR_DOCKER: docker
+#      - image: Visual Studio 2019
+#        BUILDER: CMake
+#        HOST_OR_DOCKER: docker
       - image: Ubuntu2004
         BUILDER: MSBuilder
 
