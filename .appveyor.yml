@@ -29,6 +29,8 @@ for:
       - image: Visual Studio 2019
         BUILDER: CMake
         HOST_OR_DOCKER: docker
+      - image: Ubuntu2004
+        BUILDER: MSBuilder
 
   build_script:
   - pwsh: |
